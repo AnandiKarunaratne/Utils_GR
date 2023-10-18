@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+<net id="2def6871-e972-4e80-8ede-0b821caf895f" type="http://www.pnml.org/version-2009/grammar/ptnet">
+<name><text>model</text></name>
+<page id="page0">
+<place id="p0"><name><text>p0</text></name><initialMarking><text>1</text></initialMarking></place>
+<place id="p1"><name><text>p1</text></name></place>
+<place id="p2"><name><text>p2</text></name></place>
+<place id="p3"><name><text>p3</text></name></place>
+<place id="p4"><name><text>p4</text></name></place>
+<place id="p5"><name><text>p5</text></name></place>
+<place id="p6"><name><text>p6</text></name></place>
+<place id="p7"><name><text>p7</text></name></place>
+<place id="sink"><name><text>sink</text></name></place>
+<transition id="a"><name><text>a</text></name></transition>
+<transition id="c30"><name><text>c</text></name></transition>
+<transition id="b"><name><text>b</text></name></transition>
+<transition id="d43"><name><text>d</text></name></transition>
+<transition id="c"><name><text>c</text></name></transition>
+<transition id="d"><name><text>d</text></name></transition>
+<transition id="e"><name><text>e</text></name></transition>
+<transition id="b57"><name><text>b</text></name></transition>
+<transition id="f"><name><text>f</text></name></transition>
+<transition id="g"><name><text>g</text></name></transition>
+<transition id="i"><name><text>i</text></name></transition>
+<transition id="f16"><name><text>f</text></name></transition>
+<transition id="f4"><name><text>f</text></name></transition>
+<transition id="o"><name><text>o</text></name></transition>
+<transition id="a1"><name><text>a</text></name></transition>
+<transition id="a5"><name><text>a</text></name></transition>
+<transition id="d94"><name><text>d</text></name></transition>
+<transition id="f70"><name><text>f</text></name></transition>
+<arc id="arc1" source="p0" target="a1"/>
+<arc id="arc2" source="p1" target="d"/>
+<arc id="arc3" source="p1" target="b"/>
+<arc id="arc4" source="p1" target="a"/>
+<arc id="arc5" source="p1" target="g"/>
+<arc id="arc6" source="a" target="p1"/>
+<arc id="arc7" source="c30" target="p3"/>
+<arc id="arc8" source="p2" target="b57"/>
+<arc id="arc9" source="p2" target="c"/>
+<arc id="arc10" source="d43" target="p4"/>
+<arc id="arc11" source="b" target="p2"/>
+<arc id="arc12" source="c" target="p3"/>
+<arc id="arc13" source="p3" target="f70"/>
+<arc id="arc14" source="p3" target="c30"/>
+<arc id="arc15" source="p3" target="f"/>
+<arc id="arc16" source="p4" target="d94"/>
+<arc id="arc17" source="p4" target="e"/>
+<arc id="arc18" source="d" target="p4"/>
+<arc id="arc19" source="b57" target="p2"/>
+<arc id="arc20" source="p5" target="f4"/>
+<arc id="arc21" source="p5" target="f16"/>
+<arc id="arc22" source="e" target="p5"/>
+<arc id="arc23" source="p6" target="a5"/>
+<arc id="arc24" source="f" target="p6"/>
+<arc id="arc25" source="p7" target="d43"/>
+<arc id="arc26" source="g" target="p7"/>
+<arc id="arc27" source="f16" target="sink"/>
+<arc id="arc28" source="f4" target="p6"/>
+<arc id="arc29" source="a1" target="p1"/>
+<arc id="arc30" source="a5" target="p1"/>
+<arc id="arc31" source="d94" target="p4"/>
+<arc id="arc32" source="f70" target="sink"/>
+</page>
+</net>
+</pnml>
