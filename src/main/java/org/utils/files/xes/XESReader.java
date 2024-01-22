@@ -4,15 +4,16 @@ import org.deckfour.xes.in.XParser;
 import org.deckfour.xes.in.XesXmlParser;
 import org.deckfour.xes.model.XLog;
 import org.deckfour.xes.model.XTrace;
+import org.utils.log.EventLog;
+import org.utils.log.Trace;
 
 import java.io.FileInputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 public class XESReader {
 
-    public List<String> readXES(String filePath) {
-        List<String> traces = new ArrayList<>();
+    public EventLog readXES(String filePath) {
+        EventLog traces = new EventLog();
         try {
             FileInputStream fileInputStream = new FileInputStream(filePath);
             XParser parser = new XesXmlParser();
@@ -22,12 +23,12 @@ public class XESReader {
                 XLog log = logs.get(0); // Assuming there's only one log in the XES file
 
                 for (XTrace xTrace : log) {
-                    StringBuilder trace = new StringBuilder();
+                    Trace trace = new Trace();
                     for (org.deckfour.xes.model.XEvent xEvent : xTrace) {
                         String activityName = xEvent.getAttributes().get("concept:name").toString();
-                        trace.append(activityName);
+                        trace.add(activityName);
                     }
-                    traces.add(trace.toString());
+                    traces.add(trace);
                 }
             } else {
                 System.out.println("No logs found in the XES file.");

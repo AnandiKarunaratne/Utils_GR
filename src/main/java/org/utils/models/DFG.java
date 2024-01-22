@@ -1,9 +1,14 @@
 package org.utils.models;
 
 import org.utils.files.xes.XESReader;
+import org.utils.log.Trace;
 
 import java.util.*;
 
+/**
+ * this is not used.
+ * use ModelGenerator instead.
+ */
 public class DFG {
     Set<String> actions;
     Set<String> directlyFollows;
@@ -13,7 +18,7 @@ public class DFG {
     }
 
     private void createDFG(String logFilePath, double filterThreshold) {
-        List<String> traces = new XESReader().readXES(logFilePath);
+        List<Trace> traces = new XESReader().readXES(logFilePath);
         List<String> filteredTraces = filterTraces(traces, filterThreshold);
 
         Map<String, HashSet<String>> model = new HashMap<>();
@@ -48,10 +53,11 @@ public class DFG {
         this.directlyFollows = derivedDF;
     }
 
-    private List<String> filterTraces(List<String> traces, double filterThreshold) {
+    private List<String> filterTraces(List<Trace> traces, double filterThreshold) {
         Map<String, Integer> traceOccurrences = new HashMap<>();
-        for (String str : traces) {
-            traceOccurrences.put("i" + str + "o", traceOccurrences.getOrDefault("i" + str + "o", 0) + 1);
+        for (Trace trace : traces) {
+            // fix this
+            traceOccurrences.put("i" + trace + "o", traceOccurrences.getOrDefault("i" + trace + "o", 0) + 1);
         }
 
         List<Map.Entry<String, Integer>> sortedList = new ArrayList<>(traceOccurrences.entrySet());

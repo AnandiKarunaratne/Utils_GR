@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 public class Entropia {
     public void measure(String rel, String ret) {
-        String file = "/Users/anandik/Downloads/bresults.csv";
+        String file = "/Users/anandik/Downloads/z-data/z5-ms.csv";
         Object relevantTraces = QualityMeasuresCLI.parseModel(rel);
         Object retrievedTraces = QualityMeasuresCLI.parseModel(ret);
         EntropyPrecisionRecallMeasure epr = new EntropyPrecisionRecallMeasure(relevantTraces, retrievedTraces, 0, 0, true, true, false);
@@ -19,7 +19,7 @@ public class Entropia {
              CSVPrinter csvPrinter = new CSVPrinter(fileWriter, CSVFormat.DEFAULT)) {
             Pair<Double, Double> result = epr.computeMeasure();
 
-            String[] values = {Double.toString(result.getFirst()), Double.toString(result.getSecond())};
+            String[] values = {Double.toString(result.getSecond()), Double.toString(result.getFirst())};
             csvPrinter.printRecord(Arrays.asList(values));
         } catch (Exception e) {
             throw new RuntimeException(e);

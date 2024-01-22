@@ -31,10 +31,7 @@ public class EventLog extends ArrayList<Trace> {
         super(c);
     }
 
-    public static void serializeEventLog(EventLog log, String fileName) {
-        Set<List<String>> unique = new HashSet<List<String>>();
-        unique.addAll(log);
-
+    public void serializeEventLog(String fileName) {
         try {
             FileWriter myWriter = new FileWriter(fileName);
 
@@ -55,16 +52,12 @@ public class EventLog extends ArrayList<Trace> {
             myWriter.write("<string key=\"concept:name\" value=\"log\"/>\n");
 
             int z=1;
-            Iterator<List<String>> it = unique.iterator();
-            while (it.hasNext()) {
-                List<String> t =  it.next();
-
+            for (List<String> t : this) {
                 myWriter.write("<trace>\n");
-                myWriter.write("<string key=\"concept:name\" value=\""+z+"\"/>\n");
+                myWriter.write("<string key=\"concept:name\" value=\"" + z + "\"/>\n");
 
-                Iterator<String> jt = t.iterator();
-                while (jt.hasNext()) {
-                    myWriter.write("<event><string key=\"concept:name\" value=\""+jt.next()+"\"/></event>\n");
+                for (String s : t) {
+                    myWriter.write("<event><string key=\"concept:name\" value=\"" + s + "\"/></event>\n");
                 }
 
                 myWriter.write("</trace>\n");

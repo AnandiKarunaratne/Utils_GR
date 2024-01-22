@@ -1,16 +1,18 @@
 package org.utils.coverage;
 
 import org.utils.files.xes.XESReader;
+import org.utils.log.Trace;
 
 import java.util.*;
 
 public class LogCoverageCalculator {
+    // test this class
 
     public double calculateCompleteness(String logFilePath) {
-        List<String> traces = new XESReader().readXES(logFilePath);
-        Set<String> distinctTraces = new HashSet<>(traces);
+        List<Trace> traces = new XESReader().readXES(logFilePath);
+        Set<Trace> distinctTraces = new HashSet<>(traces);
         int obs = distinctTraces.size();
-        Map<Integer, List<String>> traceOccurrences = groupStrings(traces);
+        Map<Integer, List<Trace>> traceOccurrences = groupTraces(traces);
         int q1 = traceOccurrences.getOrDefault(1, new ArrayList<>()).size();
         double richness;
         if (traceOccurrences.containsKey(2)) {
@@ -26,8 +28,8 @@ public class LogCoverageCalculator {
     }
 
     public double calculateCoverage(String logFilePath) {
-        List<String> traces = new XESReader().readXES(logFilePath);
-        Map<Integer, List<String>> traceOccurrences = groupStrings(traces);
+        List<Trace> traces = new XESReader().readXES(logFilePath);
+        Map<Integer, List<Trace>> traceOccurrences = groupTraces(traces);
         int q1 = traceOccurrences.getOrDefault(1, new ArrayList<>()).size();
         int q2 = traceOccurrences.getOrDefault(2, new ArrayList<>()).size();
         int n = traces.size();
@@ -36,6 +38,13 @@ public class LogCoverageCalculator {
         double coverage = 1 - part1 * part2;
         System.out.println(coverage);
         return coverage;
+    }
+
+    public void coverageV2(String logFilePath) {
+        List<Trace> traces = new XESReader().readXES(logFilePath);
+        Set<Trace> distinctTraces = new HashSet<>(traces);
+        System.out.println((double) distinctTraces.size()/traces.size());
+
     }
 
     public static Map<Integer, List<String>> countDistinctSubstrings(List<String> strings) {
@@ -66,26 +75,26 @@ public class LogCoverageCalculator {
         return result;
     }
 
-    private static HashMap<Integer, List<String>> groupStrings(List<String> inputList) {
+    private static HashMap<Integer, List<Trace>> groupTraces(List<Trace> inputList) {
         // Create a HashMap to count the occurrences of each distinct string
-        HashMap<String, Integer> stringCount = new HashMap<>();
+        HashMap<Trace, Integer> traceCount = new HashMap<>();
 
-        for (String str : inputList) {
+        for (Trace trace : inputList) {
             // Update the count for each string
-            stringCount.put(str, stringCount.getOrDefault(str, 0) + 1);
+            traceCount.put(trace, traceCount.getOrDefault(trace, 0) + 1);
         }
 
         // Create a HashMap to group strings by the count of occurrences
-        HashMap<Integer, List<String>> groupedStrings = new HashMap<>();
+        HashMap<Integer, List<Trace>> groupedStrings = new HashMap<>();
 
-        for (String str : stringCount.keySet()) {
-            int count = stringCount.get(str);
+        for (Trace trace : traceCount.keySet()) {
+            int count = traceCount.get(trace);
 
             // If the count is not in the groupedStrings map, create a new list for it
             groupedStrings.putIfAbsent(count, new ArrayList<>());
 
             // Add the string to the list associated with its count
-            groupedStrings.get(count).add(str);
+            groupedStrings.get(count).add(trace);
         }
 
         return groupedStrings;
